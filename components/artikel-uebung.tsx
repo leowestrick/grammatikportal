@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image';
 
 interface Frage {
   id: number
@@ -105,7 +106,7 @@ export function ArtikelUebung() {
   }
 
   const pruefeAntwort = () => {
-    let korrekt = false
+    let korrekt: boolean
     if (Array.isArray(aktuelleFrage.korrekt)) {
       korrekt = aktuelleAntwort.toLowerCase() === aktuelleFrage.korrekt.join(" ").toLowerCase()
     } else {
@@ -169,7 +170,7 @@ export function ArtikelUebung() {
       case 'bildauswahl':
         return (
           <div>
-            <img src={aktuelleFrage.bild} alt="Bild zur Frage" className="mb-6 mx-auto rounded-md shadow-md" />
+            {aktuelleFrage.bild ? <Image src={aktuelleFrage.bild} alt="Bild zur Frage" className="mb-6 mx-auto rounded-md shadow-md" /> : null}
             <Select value={aktuelleAntwort} onValueChange={handleAntwort}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Wähle den richtigen Artikel" />

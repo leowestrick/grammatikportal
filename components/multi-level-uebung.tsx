@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Star, Heart } from 'lucide-react'
-
+import Image from 'next/image'
 interface Frage {
   id: number
   typ: 'vokabel' | 'satzbau' | 'grammatik' | 'hoerverstehen' | 'leseverstehen'
@@ -317,7 +317,7 @@ export function MultiLevelUebung() {
             </audio>
           )}
           {aktuelleFrage.bild && (
-            <img src={aktuelleFrage.bild} alt="Bild zur Frage" className="w-full mb-4 rounded-lg" />
+            <Image src={aktuelleFrage.bild} alt="Bild zur Frage" className="w-full mb-4 rounded-lg" />
           )}
           {renderFrage()}
           <AnimatePresence>
