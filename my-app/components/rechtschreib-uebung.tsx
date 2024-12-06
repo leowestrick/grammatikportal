@@ -2,38 +2,40 @@
 
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface Frage {
   id: number
   satz: string
-  optionen: string[]
   korrekt: string
+  hinweis: string
 }
 
 const fragen: Frage[] = [
-  { id: 1, satz: "Das Buch liegt ___ dem Tisch.", optionen: ["auf", "unter", "neben"], korrekt: "auf" },
-  { id: 2, satz: "Wir fahren ___ Berlin.", optionen: ["nach", "zu", "in"], korrekt: "nach" },
-  { id: 3, satz: "Sie wartet ___ ihren Freund.", optionen: ["für", "auf", "an"], korrekt: "auf" },
-  { id: 4, satz: "Der Zug fährt ___ 10 Minuten ab.", optionen: ["in", "mit", "vor"], korrekt: "in" },
-  { id: 5, satz: "Ich komme ___ Frankreich.", optionen: ["von", "aus", "nach"], korrekt: "aus" },
+  { id: 1, satz: "Der hund bellt laut.", korrekt: "Der Hund bellt laut.", hinweis: "Substantive werden großgeschrieben." },
+  { id: 2, satz: "ich gehe zur schule", korrekt: "Ich gehe zur Schule.", hinweis: "Satzanfänge und Substantive werden großgeschrieben." },
+  { id: 3, satz: "Er sagte das er kommt.", korrekt: "Er sagte, dass er kommt.", hinweis: "Hier wird 'dass' als Konjunktion verwendet." },
+  { id: 4, satz: "Die sonne scheint hell.", korrekt: "Die Sonne scheint hell.", hinweis: "Substantive werden großgeschrieben." },
+  { id: 5, satz: "Sie hat einen neuen Fußball-schuh gekauft.", korrekt: "Sie hat einen neuen Fußballschuh gekauft.", hinweis: "Zusammengesetzte Substantive werden in der Regel zusammengeschrieben." },
 ]
 
-export function PraepositionUebung() {
+export function RechtschreibUebung() {
   const [aktuelleFrageIndex, setAktuelleFrageIndex] = useState(0)
   const [antworten, setAntworten] = useState<string[]>(Array(fragen.length).fill(''))
   const [istBeendet, setIstBeendet] = useState(false)
+  const [zeigeHinweis, setZeigeHinweis] = useState(false)
   const [istKorrekt, setIstKorrekt] = useState<boolean | null>(null)
   const [versuchsZaehler, setVersuchsZaehler] = useState(0)
 
   const aktuelleAntwort = antworten[aktuelleFrageIndex]
   const aktuelleFrage = fragen[aktuelleFrageIndex]
 
-  const handleAntwort = (wert: string) => {
+  const handleAntwort = (event: React.ChangeEvent<HTMLInputElement>) => {
     const neueAntworten = [...antworten]
-    neueAntworten[aktuelleFrageIndex] = wert
+    neueAntworten[aktuelleFrageIndex] = event.target.value
     setAntworten(neueAntworten)
     setIstKorrekt(null)
   }
@@ -48,6 +50,7 @@ export function PraepositionUebung() {
         if (aktuelleFrageIndex < fragen.length - 1) {
           setAktuelleFrageIndex(aktuelleFrageIndex + 1)
           setIstKorrekt(null)
+          setZeigeHinweis(false)
           setVersuchsZaehler(0)
         } else {
           setIstBeendet(true)
@@ -76,6 +79,7 @@ export function PraepositionUebung() {
           setAntworten(Array(fragen.length).fill(''))
           setIstBeendet(false)
           setIstKorrekt(null)
+          setZeigeHinweis(false)
           setVersuchsZaehler(0)
         }}>
           Übung wiederholen
@@ -89,19 +93,19 @@ export function PraepositionUebung() {
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Frage {aktuelleFrageIndex + 1} von {fragen.length}</h2>
       <Card className="mb-6">
         <CardContent className="pt-6">
-          <p className="text-xl mb-6 text-gray-700">{aktuelleFrage.satz.replace('___', '________')}</p>
-          <Select value={aktuelleAntwort} onValueChange={handleAntwort}>
-            <SelectTrigger className="w-full mb-4">
-              <SelectValue placeholder="Wähle die richtige Präposition" />
-            </SelectTrigger>
-            <SelectContent>
-              {aktuelleFrage.optionen.map((option) => (
-                <SelectItem key={option} value={option}>
-                  {option}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <p className="text-xl mb-6 text-gray-700">Korrigiere den folgenden Satz:</p>
+          <p className="text-lg font-semibold mb-4 text-gray-800">{aktuelleFrage.satz}</p>
+          <div className="mb-4">
+            <Label htmlFor="antwort" className="text-lg text-gray-700 mb-2 block">Deine Antwort:</Label>
+            <Input
+              type="text"
+              id="antwort"
+              value={aktuelleAntwort}
+              onChange={handleAntwort}
+              placeholder="Gib deine korrigierte Version ein"
+              className="w-full p-2 text-lg"
+            />
+          </div>
           <AnimatePresence>
             {istKorrekt !== null && (
               <motion.p
@@ -114,11 +118,25 @@ export function PraepositionUebung() {
               </motion.p>
             )}
           </AnimatePresence>
+          {zeigeHinweis && (
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-sm text-gray-600 mt-4 p-4 bg-gray-100 rounded-md"
+            >
+              {aktuelleFrage.hinweis}
+            </motion.p>
+          )}
         </CardContent>
       </Card>
-      <Button onClick={pruefeAntwort} className="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg py-3" disabled={!aktuelleAntwort}>
-        Antwort prüfen
-      </Button>
+      <div className="flex justify-between">
+        <Button onClick={() => setZeigeHinweis(true)} variant="outline" className="text-gray-600">
+          Hinweis
+        </Button>
+        <Button onClick={pruefeAntwort} className="bg-blue-500 hover:bg-blue-600 text-white text-lg py-3" disabled={!aktuelleAntwort}>
+          Antwort prüfen
+        </Button>
+      </div>
     </div>
   )
 }
