@@ -2,14 +2,14 @@ import { Navbar } from '../components/navbar'
 import { UebungCard } from '../components/uebung-card'
 
 const uebungen = [
-  { title: "Artikel", description: "Üben Sie den richtigen Gebrauch von der, die, das", link: "/uebungen/artikel" },
-  { title: "Verbkonjugation", description: "Trainieren Sie die Konjugation deutscher Verben", link: "/uebungen/verbkonjugation" },
-  { title: "Rechtschreibung", description: "Verbessern Sie Ihre deutsche Rechtschreibung", link: "/uebungen/rechtschreibung" },
-  { title: "Satzbau", description: "Lernen Sie die korrekte Wortstellung im Satz", link: "/uebungen/satzbau" },
-  { title: "Präpositionen", description: "Üben Sie den richtigen Gebrauch von Präpositionen", link: "/uebungen/praepositionen" },
-  { title: "Groß- und Kleinschreibung", description: "Lernen Sie die Regeln der Groß- und Kleinschreibung", link: "/uebungen/gross-kleinschreibung" },
-  { title: "Kommasetzung", description: "Üben Sie die korrekte Verwendung von Kommas", link: "/uebungen/kommasetzung" },
-  { title: "Multi-Level Übung", description: "Testen Sie Ihre Deutschkenntnisse in verschiedenen Bereichen", link: "/uebungen/multi-level" },
+  { title: "Artikel", description: "Üben Sie den richtigen Gebrauch von der, die, das", link: "/tasks/artikel" },
+  { title: "Verbkonjugation", description: "Trainieren Sie die Konjugation deutscher Verben", link: "/tasks/verbkonjugation" },
+  { title: "Rechtschreibung", description: "Verbessern Sie Ihre deutsche Rechtschreibung", link: "/tasks/rechtschreibung" },
+  { title: "Satzbau", description: "Lernen Sie die korrekte Wortstellung im Satz", link: "/tasks/satzbau" },
+  { title: "Präpositionen", description: "Üben Sie den richtigen Gebrauch von Präpositionen", link: "/tasks/praepositionen" },
+  { title: "Groß- und Kleinschreibung", description: "Lernen Sie die Regeln der Groß- und Kleinschreibung", link: "/tasks/gross-kleinschreibung" },
+  { title: "Kommasetzung", description: "Üben Sie die korrekte Verwendung von Kommas", link: "/tasks/kommasetzung" },
+  { title: "Multi-Level Übung", description: "Testen Sie Ihre Deutschkenntnisse in verschiedenen Bereichen", link: "/tasks/multi-level" },
 ]
 
 export default function Home() {
