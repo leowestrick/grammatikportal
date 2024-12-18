@@ -6,6 +6,7 @@ import { ArtikelRegeln } from '../../../components/grammatik/artikel-regeln'
 import { ArtikelUebung } from '../../../components/grammatik/artikel-uebung'
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from 'framer-motion'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function ArtikelUebungPage() {
   const [showUebung, setShowUebung] = useState(false)
@@ -39,10 +40,21 @@ export default function ArtikelUebungPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
             >
-              <p className="text-center mb-8 text-gray-700">
-                In dieser erweiterten Übung wirst du verschiedene Aufgabentypen zu Artikeln bearbeiten:
-                Multiple-Choice, Lückentexte, Bildauswahl und Satzverbindungen.
-              </p>
+              <Card className="mb-8">
+                <CardHeader>
+                  <CardTitle>Artikel-Übung mit verschiedenen Schwierigkeitsgraden</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4">
+                    Wähle einen Schwierigkeitsgrad aus und beginne mit der Übung. Du musst jeden Schwierigkeitsgrad abschließen, bevor du zum nächsten übergehen kannst.
+                  </p>
+                  <ul className="list-disc pl-5 space-y-2">
+                    <li><strong>Anfänger:</strong> Einfache Sätze mit Fokus auf der Grundverwendung von Artikeln.</li>
+                    <li><strong>Fortgeschritten:</strong> Komplexere Sätze mit Lückentexten und Bildauswahl.</li>
+                    <li><strong>Experte:</strong> Anspruchsvolle Sätze mit mehreren Artikeln und speziellen Fällen.</li>
+                  </ul>
+                </CardContent>
+              </Card>
               <ArtikelUebung />
             </motion.div>
           )}

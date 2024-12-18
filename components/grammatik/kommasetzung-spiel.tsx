@@ -12,7 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import React from 'react'
+
 interface Sentence {
   text: string
   correctPositions: number[]
@@ -98,6 +98,7 @@ export function KommasetzungSpiel() {
   }
 
   const endGame = () => {
+    updateProgress()
     setGameOver(true)
     setFeedback(null)
   }
@@ -110,6 +111,14 @@ export function KommasetzungSpiel() {
     setShowRule(false)
     setTimeLeft(60)
     setGameOver(false)
+  }
+
+  const updateProgress = () => {
+    const progress = Math.round((score / sentences.length) * 100)
+    const storedProgress = localStorage.getItem('deutschLernProgress')
+    let progressData = storedProgress ? JSON.parse(storedProgress) : {}
+    progressData['Kommasetzung'] = progress
+    localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
   }
 
   if (gameOver) {
