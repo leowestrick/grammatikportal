@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { Navbar } from '../../../components/navbar'
-import { ArtikelRegeln } from '../../../components/artikel-regeln'
-import { ArtikelUebung } from '../../../components/artikel-uebung'
+import { ArtikelRegeln } from '../../../components/grammatik/artikel-regeln'
+import { ArtikelUebung } from '../../../components/grammatik/artikel-uebung'
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from 'framer-motion'
 

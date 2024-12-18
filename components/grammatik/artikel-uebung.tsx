@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { motion, AnimatePresence } from 'framer-motion'
-import { saveProgress, getProgress } from '../utils/progress-manager'
+import { saveProgress, getProgress } from '../../utils/progress-manager'
 
 interface Frage {
   id: number

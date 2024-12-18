@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Navbar } from '../../../components/navbar'
-import { KommasetzungSpiel } from '../../../components/kommasetzung-spiel'
+import { KommasetzungSpiel } from '../../../components/grammatik/kommasetzung-spiel'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 
