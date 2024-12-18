@@ -14,7 +14,7 @@ export function Navbar() {
               <Link href="/" className="text-gray-600 hover:text-gray-800 transition-colors">Startseite</Link>
             </motion.li>
             <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/app/tasks" className="text-gray-600 hover:text-gray-800 transition-colors">Übungen</Link>
+              <Link href="/uebungen" className="text-gray-600 hover:text-gray-800 transition-colors">Übungen</Link>
             </motion.li>
             <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link href="/fortschritt" className="text-gray-600 hover:text-gray-800 transition-colors">Mein Fortschritt</Link>

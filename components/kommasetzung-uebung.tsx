@@ -12,6 +12,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { addPoints, unlockBadge } from '../../utils/gamification'
+import { saveProgress } from '../../utils/progress-manager'
 
 interface Sentence {
   text: string
@@ -79,6 +81,7 @@ export function KommasetzungSpiel() {
     const correct = JSON.stringify(userCommas) === JSON.stringify(currentSentence.correctPositions)
     if (correct) {
       setScore(score + Math.ceil(timeLeft / 10))
+      addPoints(10)
       setFeedback("Richtig! Super gemacht!")
       setTimeout(() => {
         if (currentSentenceIndex < sentences.length - 1) {
@@ -92,7 +95,7 @@ export function KommasetzungSpiel() {
         }
       }, 2000)
     } else {
-      setFeedback("Nicht ganz richtig. Versuch es noch einmal!")
+      setFeedback("Nicht ganz richtig. Versuche es noch einmal!")
       setShowRule(true)
     }
   }
@@ -101,6 +104,7 @@ export function KommasetzungSpiel() {
     updateProgress()
     setGameOver(true)
     setFeedback(null)
+    unlockBadge('kommasetzung-meister')
   }
 
   const restartGame = () => {
@@ -115,10 +119,7 @@ export function KommasetzungSpiel() {
 
   const updateProgress = () => {
     const progress = Math.round((score / sentences.length) * 100)
-    const storedProgress = localStorage.getItem('deutschLernProgress')
-    let progressData = storedProgress ? JSON.parse(storedProgress) : {}
-    progressData['Kommasetzung'] = progress
-    localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
+    saveProgress('Kommasetzung', progress)
   }
 
   if (gameOver) {

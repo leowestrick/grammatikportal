@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image';
+import { saveProgress, getProgress } from '../utils/progress-manager'
 
 interface Frage {
   id: number
@@ -20,82 +20,111 @@ interface Frage {
   erklaerung: string
 }
 
-const fragen: Frage[] = [
-  { 
-    id: 1, 
-    typ: 'multiplechoice',
-    text: "___ Hund bellt laut.", 
-    optionen: ["Der", "Die", "Das"], 
-    korrekt: "Der",
-    erklaerung: "Hund ist maskulin, daher verwendet man den Artikel 'der'."
-  },
-  { 
-    id: 2, 
-    typ: 'multiplechoice',
-    text: "___ Sonne scheint hell.", 
-    optionen: ["Der", "Die", "Das"], 
-    korrekt: "Die",
-    erklaerung: "Sonne ist feminin, daher verwendet man den Artikel 'die'."
-  },
-  { 
-    id: 3, 
-    typ: 'multiplechoice',
-    text: "___ Auto fährt schnell.", 
-    optionen: ["Der", "Die", "Das"], 
-    korrekt: "Das",
-    erklaerung: "Auto ist neutral, daher verwendet man den Artikel 'das'."
-  },
-  { 
-    id: 4, 
-    typ: 'lueckentext',
-    text: "___ Katze und ___ Maus spielen zusammen.",
-    korrekt: ["Die", "die"],
-    erklaerung: "Katze und Maus sind beide feminin, daher verwendet man den Artikel 'die'."
-  },
-  { 
-    id: 5, 
-    typ: 'bildauswahl',
-    text: "Wähle den richtigen Artikel für das Bild:",
-    optionen: ["Der", "Die", "Das"],
-    korrekt: "Das",
-    bild: "/placeholder.svg?height=150&width=150",
-    erklaerung: "Das Bild zeigt ein Haus, welches neutral ist. Daher ist der korrekte Artikel 'das'."
-  },
-  { 
-    id: 6, 
-    typ: 'saetzeverbinden',
-    text: "Verbinde die Satzteile mit dem richtigen Artikel:",
-    optionen: ["Der Apfel ist rot", "Die Blume ist schön", "Das Kind spielt"],
-    korrekt: ["Der", "Die", "Das"],
-    erklaerung: "Apfel ist maskulin (der), Blume ist feminin (die), und Kind ist neutral (das)."
-  },
-  { 
-    id: 7, 
-    typ: 'multiplechoice',
-    text: "Welcher Artikel passt nicht? ___ Buch, ___ Heft, ___ Stift",
-    optionen: ["Der", "Die", "Das"],
-    korrekt: "Die",
-    erklaerung: "Buch und Heft sind neutral (das), Stift ist maskulin (der). 'Die' passt zu keinem der Wörter."
-  },
-  { 
-    id: 8, 
-    typ: 'lueckentext',
-    text: "___ Sonne scheint am Tag, und ___ Mond leuchtet in ___ Nacht.",
-    korrekt: ["Die", "der", "der"],
-    erklaerung: "Sonne ist feminin (die), Mond ist maskulin (der), und Nacht ist auch feminin, aber hier im Dativ, daher 'der'."
-  }
-]
+const fragen: { [key: string]: Frage[] } = {
+  anfaenger: [
+    { 
+      id: 1, 
+      typ: 'multiplechoice',
+      text: "___ Hund bellt laut.", 
+      optionen: ["Der", "Die", "Das"], 
+      korrekt: "Der",
+      erklaerung: "Hund ist maskulin, daher verwendet man den Artikel 'der'."
+    },
+    { 
+      id: 2, 
+      typ: 'multiplechoice',
+      text: "___ Sonne scheint hell.", 
+      optionen: ["Der", "Die", "Das"], 
+      korrekt: "Die",
+      erklaerung: "Sonne ist feminin, daher verwendet man den Artikel 'die'."
+    },
+    { 
+      id: 3, 
+      typ: 'multiplechoice',
+      text: "___ Auto fährt schnell.", 
+      optionen: ["Der", "Die", "Das"], 
+      korrekt: "Das",
+      erklaerung: "Auto ist neutral, daher verwendet man den Artikel 'das'."
+    },
+  ],
+  fortgeschritten: [
+    { 
+      id: 1, 
+      typ: 'lueckentext',
+      text: "___ Katze und ___ Maus spielen zusammen.",
+      korrekt: ["Die", "die"],
+      erklaerung: "Katze und Maus sind beide feminin, daher verwendet man den Artikel 'die'."
+    },
+    { 
+      id: 2, 
+      typ: 'bildauswahl',
+      text: "Wähle den richtigen Artikel für das Bild:",
+      optionen: ["Der", "Die", "Das"],
+      korrekt: "Das",
+      bild: "/placeholder.svg?height=150&width=150",
+      erklaerung: "Das Bild zeigt ein Haus, welches neutral ist. Daher ist der korrekte Artikel 'das'."
+    },
+    { 
+      id: 3, 
+      typ: 'saetzeverbinden',
+      text: "Verbinde die Satzteile mit dem richtigen Artikel:",
+      optionen: ["Der Apfel ist rot", "Die Blume ist schön", "Das Kind spielt"],
+      korrekt: ["Der", "Die", "Das"],
+      erklaerung: "Apfel ist maskulin (der), Blume ist feminin (die), und Kind ist neutral (das)."
+    },
+  ],
+  experte: [
+    { 
+      id: 1, 
+      typ: 'multiplechoice',
+      text: "Welcher Artikel passt nicht? ___ Buch, ___ Heft, ___ Stift",
+      optionen: ["Der", "Die", "Das"],
+      korrekt: "Die",
+      erklaerung: "Buch und Heft sind neutral (das), Stift ist maskulin (der). 'Die' passt zu keinem der Wörter."
+    },
+    { 
+      id: 2, 
+      typ: 'lueckentext',
+      text: "___ Sonne scheint am Tag, und ___ Mond leuchtet in ___ Nacht.",
+      korrekt: ["Die", "der", "der"],
+      erklaerung: "Sonne ist feminin (die), Mond ist maskulin (der), und Nacht ist auch feminin, aber hier im Dativ, daher 'der'."
+    },
+    { 
+      id: 3, 
+      typ: 'saetzeverbinden',
+      text: "Verbinde die Satzteile mit dem richtigen Artikel:",
+      optionen: ["___ Wetter ist schön", "___ Reise war lang", "___ Essen schmeckt gut"],
+      korrekt: ["Das", "Die", "Das"],
+      erklaerung: "Wetter und Essen sind neutral (das), Reise ist feminin (die)."
+    },
+  ]
+}
+
+type Schwierigkeitsgrad = 'anfaenger' | 'fortgeschritten' | 'experte'
 
 export function ArtikelUebung() {
+  const [schwierigkeitsgrad, setSchwierigkeitsgrad] = useState<Schwierigkeitsgrad>('anfaenger')
   const [aktuelleFrageIndex, setAktuelleFrageIndex] = useState(0)
-  const [antworten, setAntworten] = useState<string[]>(Array(fragen.length).fill(''))
+  const [antworten, setAntworten] = useState<string[]>(Array(fragen[schwierigkeitsgrad].length).fill(''))
   const [istBeendet, setIstBeendet] = useState(false)
   const [istKorrekt, setIstKorrekt] = useState<boolean | null>(null)
   const [versuchsZaehler, setVersuchsZaehler] = useState(0)
   const [zeigeErklaerung, setZeigeErklaerung] = useState(false)
+  const [verfuegbareSchwierigkeitsgrade, setVerfuegbareSchwierigkeitsgrade] = useState<Schwierigkeitsgrad[]>(['anfaenger'])
 
   const aktuelleAntwort = antworten[aktuelleFrageIndex]
-  const aktuelleFrage = fragen[aktuelleFrageIndex]
+  const aktuelleFrage = fragen[schwierigkeitsgrad][aktuelleFrageIndex]
+
+  useEffect(() => {
+    const fortgeschrittenFreigeschaltet = getProgress('Artikel (anfaenger)') === 100
+    const experteFreigeschaltet = getProgress('Artikel (fortgeschritten)') === 100
+
+    let verfuegbar: Schwierigkeitsgrad[] = ['anfaenger']
+    if (fortgeschrittenFreigeschaltet) verfuegbar.push('fortgeschritten')
+    if (experteFreigeschaltet) verfuegbar.push('experte')
+
+    setVerfuegbareSchwierigkeitsgrade(verfuegbar)
+  }, [])
 
   const handleAntwort = (wert: string) => {
     const neueAntworten = [...antworten]
@@ -106,7 +135,7 @@ export function ArtikelUebung() {
   }
 
   const pruefeAntwort = () => {
-    let korrekt: boolean
+    let korrekt = false
     if (Array.isArray(aktuelleFrage.korrekt)) {
       korrekt = aktuelleAntwort.toLowerCase() === aktuelleFrage.korrekt.join(" ").toLowerCase()
     } else {
@@ -117,7 +146,7 @@ export function ArtikelUebung() {
 
     if (korrekt) {
       setTimeout(() => {
-        if (aktuelleFrageIndex < fragen.length - 1) {
+        if (aktuelleFrageIndex < fragen[schwierigkeitsgrad].length - 1) {
           setAktuelleFrageIndex(aktuelleFrageIndex + 1)
           setIstKorrekt(null)
           setVersuchsZaehler(0)
@@ -133,12 +162,27 @@ export function ArtikelUebung() {
 
   const berechnePunktzahl = () => {
     return antworten.filter((antwort, index) => {
-      const frage = fragen[index]
+      const frage = fragen[schwierigkeitsgrad][index]
       if (Array.isArray(frage.korrekt)) {
         return antwort.toLowerCase() === frage.korrekt.join(" ").toLowerCase()
       }
       return antwort.toLowerCase() === frage.korrekt.toLowerCase()
     }).length
+  }
+
+  const updateProgress = () => {
+    const progress = Math.round((berechnePunktzahl() / fragen[schwierigkeitsgrad].length) * 100)
+    saveProgress(`Artikel (${schwierigkeitsgrad})`, progress)
+  }
+
+  const handleSchwierigkeitswechsel = (neuerSchwierigkeitsgrad: Schwierigkeitsgrad) => {
+    setSchwierigkeitsgrad(neuerSchwierigkeitsgrad)
+    setAktuelleFrageIndex(0)
+    setAntworten(Array(fragen[neuerSchwierigkeitsgrad].length).fill(''))
+    setIstBeendet(false)
+    setIstKorrekt(null)
+    setZeigeErklaerung(false)
+    setVersuchsZaehler(0)
   }
 
   const renderFrage = () => {
@@ -170,7 +214,7 @@ export function ArtikelUebung() {
       case 'bildauswahl':
         return (
           <div>
-            {aktuelleFrage.bild ? <Image src={aktuelleFrage.bild} alt="Bild zur Frage" className="mb-6 mx-auto rounded-md shadow-md" /> : null}
+            <img src={aktuelleFrage.bild} alt="Bild zur Frage" className="mb-6 mx-auto rounded-md shadow-md" />
             <Select value={aktuelleAntwort} onValueChange={handleAntwort}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Wähle den richtigen Artikel" />
@@ -218,13 +262,14 @@ export function ArtikelUebung() {
 
   if (istBeendet) {
     const punktzahl = berechnePunktzahl()
+    updateProgress()
     return (
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
-        <p className="text-xl mb-4">Deine Punktzahl: {punktzahl} von {fragen.length}</p>
+        <p className="text-xl mb-4">Deine Punktzahl: {punktzahl} von {fragen[schwierigkeitsgrad].length}</p>
         <Button onClick={() => {
           setAktuelleFrageIndex(0)
-          setAntworten(Array(fragen.length).fill(''))
+          setAntworten(Array(fragen[schwierigkeitsgrad].length).fill(''))
           setIstBeendet(false)
           setIstKorrekt(null)
           setVersuchsZaehler(0)
@@ -238,7 +283,22 @@ export function ArtikelUebung() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Frage {aktuelleFrageIndex + 1} von {fragen.length}</h2>
+      <div className="mb-6">
+        <Label htmlFor="schwierigkeitsgrad">Schwierigkeitsgrad:</Label>
+        <Select value={schwierigkeitsgrad} onValueChange={(value: Schwierigkeitsgrad) => handleSchwierigkeitswechsel(value)}>
+          <SelectTrigger id="schwierigkeitsgrad">
+            <SelectValue placeholder="Wähle einen Schwierigkeitsgrad" />
+          </SelectTrigger>
+          <SelectContent>
+            {verfuegbareSchwierigkeitsgrade.map((grad) => (
+              <SelectItem key={grad} value={grad}>
+                {grad.charAt(0).toUpperCase() + grad.slice(1)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Frage {aktuelleFrageIndex + 1} von {fragen[schwierigkeitsgrad].length}</h2>
       <Card className="mb-6">
         <CardContent className="pt-6">
           <p className="text-xl mb-6 text-gray-700">{aktuelleFrage.text}</p>
