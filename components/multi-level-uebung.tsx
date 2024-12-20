@@ -236,7 +236,7 @@ export function MultiLevelUebung() {
     const totalQuestions = levels.reduce((sum, level) => sum + level.fragen.length, 0)
     const progress = Math.round((punktzahl / totalQuestions) * 100)
     const storedProgress = localStorage.getItem('deutschLernProgress')
-    let progressData = storedProgress ? JSON.parse(storedProgress) : {}
+    const progressData = storedProgress ? JSON.parse(storedProgress) : {}
     progressData['Multi-Level'] = progress
     localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
   }

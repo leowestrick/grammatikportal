@@ -54,7 +54,7 @@ export function GrossKleinSchreibung() {
   const updateProgress = () => {
     const progress = Math.round((punktzahl / fragen.length) * 100)
     const storedProgress = localStorage.getItem('deutschLernProgress')
-    let progressData = storedProgress ? JSON.parse(storedProgress) : {}
+    const progressData = storedProgress ? JSON.parse(storedProgress) : {}
     progressData['Groß- und Kleinschreibung'] = progress
     localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
   }

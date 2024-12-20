@@ -81,7 +81,7 @@ export function LueckentextSpiel() {
   const updateProgress = () => {
     const progress = Math.round((score / sentences.length) * 100)
     const storedProgress = localStorage.getItem('deutschLernProgress')
-    let progressData = storedProgress ? JSON.parse(storedProgress) : {}
+    const progressData = storedProgress ? JSON.parse(storedProgress) : {}
     progressData['Lückentext'] = progress
     localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
   }

@@ -108,7 +108,7 @@ export function SatzbauUebung() {
     const fortgeschrittenFreigeschaltet = getProgress('Satzbau (anfaenger)') === 100
     const experteFreigeschaltet = getProgress('Satzbau (fortgeschritten)') === 100
 
-    let verfuegbar: Schwierigkeitsgrad[] = ['anfaenger']
+    const verfuegbar: Schwierigkeitsgrad[] = ['anfaenger']
     if (fortgeschrittenFreigeschaltet) verfuegbar.push('fortgeschritten')
     if (experteFreigeschaltet) verfuegbar.push('experte')
 

@@ -53,7 +53,7 @@ export function PraepositionUebung() {
     const fortgeschrittenFreigeschaltet = getProgress('Präpositionen (anfaenger)') === 100
     const experteFreigeschaltet = getProgress('Präpositionen (fortgeschritten)') === 100
 
-    let verfuegbar: Schwierigkeitsgrad[] = ['anfaenger']
+    const verfuegbar: Schwierigkeitsgrad[] = ['anfaenger']
     if (fortgeschrittenFreigeschaltet) verfuegbar.push('fortgeschritten')
     if (experteFreigeschaltet) verfuegbar.push('experte')
 

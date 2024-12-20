@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip"
 import { addPoints, unlockBadge } from '../../utils/gamification'
 import { saveProgress } from '../../utils/progress-manager'
+import React from 'react'
 
 interface Sentence {
   text: string

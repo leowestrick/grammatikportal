@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -53,7 +53,7 @@ export function WortDurcheinanderSpiel() {
   const updateProgress = () => {
     const progress = Math.round((score / words.length) * 100)
     const storedProgress = localStorage.getItem('deutschLernProgress')
-    let progressData = storedProgress ? JSON.parse(storedProgress) : {}
+    const progressData = storedProgress ? JSON.parse(storedProgress) : {}
     progressData['Wort-Durcheinander'] = progress
     localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
   }

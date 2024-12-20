@@ -119,7 +119,7 @@ export function ArtikelUebung() {
     const fortgeschrittenFreigeschaltet = getProgress('Artikel (anfaenger)') === 100
     const experteFreigeschaltet = getProgress('Artikel (fortgeschritten)') === 100
 
-    let verfuegbar: Schwierigkeitsgrad[] = ['anfaenger']
+    const verfuegbar: Schwierigkeitsgrad[] = ['anfaenger']
     if (fortgeschrittenFreigeschaltet) verfuegbar.push('fortgeschritten')
     if (experteFreigeschaltet) verfuegbar.push('experte')
 
