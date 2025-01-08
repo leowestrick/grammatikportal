@@ -4,7 +4,7 @@ type ProgressData = {
 
 export const saveProgress = (category: string, score: number) => {
   const storedProgress = localStorage.getItem('deutschLernProgress');
-  let progressData: ProgressData = storedProgress ? JSON.parse(storedProgress) : {};
+  const progressData: ProgressData = storedProgress ? JSON.parse(storedProgress) : {};
   progressData[category] = score;
   localStorage.setItem('deutschLernProgress', JSON.stringify(progressData));
 };
