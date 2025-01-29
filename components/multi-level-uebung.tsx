@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Star, Heart } from 'lucide-react'
-import Image from 'next/image'
+
 interface Frage {
   id: number
   typ: 'vokabel' | 'satzbau' | 'grammatik' | 'hoerverstehen' | 'leseverstehen'
@@ -215,6 +215,7 @@ export function MultiLevelUebung() {
         setFeedback("Das ist leider nicht korrekt. Versuche es noch einmal!")
       } else {
         setIstBeendet(true)
+        updateProgress()
       }
     }
   }
@@ -227,7 +228,17 @@ export function MultiLevelUebung() {
       setAktuelleFrageIndex(0)
     } else {
       setIstBeendet(true)
+      updateProgress()
     }
+  }
+
+  const updateProgress = () => {
+    const totalQuestions = levels.reduce((sum, level) => sum + level.fragen.length, 0)
+    const progress = Math.round((punktzahl / totalQuestions) * 100)
+    const storedProgress = localStorage.getItem('deutschLernProgress')
+    const progressData = storedProgress ? JSON.parse(storedProgress) : {}
+    progressData['Multi-Level'] = progress
+    localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
   }
 
   const renderFrage = () => {
@@ -317,7 +328,7 @@ export function MultiLevelUebung() {
             </audio>
           )}
           {aktuelleFrage.bild && (
-            <Image src={aktuelleFrage.bild} alt="Bild zur Frage" className="w-full mb-4 rounded-lg" />
+            <img src={aktuelleFrage.bild} alt="Bild zur Frage" className="w-full mb-4 rounded-lg" />
           )}
           {renderFrage()}
           <AnimatePresence>

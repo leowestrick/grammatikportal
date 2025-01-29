@@ -1,30 +1,87 @@
-import { Navbar } from '../components/navbar'
-import { UebungCard } from '../components/uebung-card'
+'use client'
 
-const uebungen = [
-  { title: "Artikel", description: "Üben Sie den richtigen Gebrauch von der, die, das", link: "/tasks/artikel" },
-  { title: "Verbkonjugation", description: "Trainieren Sie die Konjugation deutscher Verben", link: "/tasks/verbkonjugation" },
-  { title: "Rechtschreibung", description: "Verbessern Sie Ihre deutsche Rechtschreibung", link: "/tasks/rechtschreibung" },
-  { title: "Satzbau", description: "Lernen Sie die korrekte Wortstellung im Satz", link: "/tasks/satzbau" },
-  { title: "Präpositionen", description: "Üben Sie den richtigen Gebrauch von Präpositionen", link: "/tasks/praepositionen" },
-  { title: "Groß- und Kleinschreibung", description: "Lernen Sie die Regeln der Groß- und Kleinschreibung", link: "/tasks/gross-kleinschreibung" },
-  { title: "Kommasetzung", description: "Üben Sie die korrekte Verwendung von Kommas", link: "/tasks/kommasetzung" },
-  { title: "Multi-Level Übung", description: "Testen Sie Ihre Deutschkenntnisse in verschiedenen Bereichen", link: "/tasks/multi-level" },
-]
+import { Navbar } from '@/components/navbar';
 
-export default function Home() {
+export default function Example() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <Navbar />
-      <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-12 text-center text-gray-800">Willkommen zur Deutschen Lernplattform</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {uebungen.map((uebung, index) => (
-            <UebungCard key={index} {...uebung} />
-          ))}
+      <div className="bg-white">
+
+        <Navbar></Navbar>
+
+        <div className="relative isolate px-6 pt-14 lg:px-8">
+          <div
+              aria-hidden="true"
+              className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          >
+            <div
+                style={{
+                  clipPath:
+                      'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                }}
+                className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            />
+          </div>
+          <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+            <div className="text-center">
+              <h1 className="text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
+                Deine Deutsch Lernplattform
+              </h1>
+              <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
+                Durch unsere Übungsaufgaben kannst du mit Spaß deine Grammatik und Rechtschreibung verbessern.
+              </p>
+              <div className="mt-10 flex items-center justify-center gap-x-6">
+                <a
+                    href="#"
+                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Grammatik Übungen
+                </a>
+                <a
+                    href="#"
+                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Rechtschreibübungen
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+          >
+            <div
+                style={{
+                  clipPath:
+                      'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                }}
+                className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            />
+          </div>
         </div>
-      </main>
-    </div>
+        <div className="bg-white sm:pb-32">
+          <div className="text-center mb-10">
+            <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900">
+              Entwickelt von Schülern
+            </h2>
+          </div>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+              {stats.map((stat) => (
+                  <div key={stat.id} className="mx-auto flex max-w-xs flex-col gap-y-4">
+                    <dt className="text-base/7 text-gray-600">{stat.name}</dt>
+                    <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                      {stat.value}
+                    </dd>
+                  </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </div>
   )
 }
-
+const stats = [
+  {id: 1, name: 'Übungsaufgaben', value: '20'},
+  {id: 2, name: 'Monatliche Benutzer', value: '12'},
+  {id: 3, name: 'Entwicklungszeit', value: '800 h'},
+]
