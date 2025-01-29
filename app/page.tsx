@@ -58,22 +58,8 @@ export default function Example() {
             />
           </div>
         </div>
-        {statsUsers()}
-        {newsletterSection()}
-        {faqSection()}
-      </div>
-  )
-}
-const stats = [
-  { id: 1, name: 'Übungsaufgaben', value: '20' },
-  { id: 2, name: 'Monatliche Benutzer', value: '12' },
-  { id: 3, name: 'Entwicklungszeit', value: '800 h' },
-]
-
-export function statsUsers() {
-  return (
-      <div className="bg-white sm:pb-32">
-        <div className="text-center mb-10">
+        <div className="bg-white sm:pb-32">
+          <div className="text-center mb-10">
             <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900">
               Entwickelt von Schülern
             </h2>
@@ -91,10 +77,19 @@ export function statsUsers() {
             </dl>
           </div>
         </div>
-        )
+        {newsletterSection()}
+        {faqSection()}
+      </div>
+  )
 }
+const stats = [
+  {id: 1, name: 'Übungsaufgaben', value: '20'},
+  {id: 2, name: 'Monatliche Benutzer', value: '12'},
+  {id: 3, name: 'Entwicklungszeit', value: '800 h'},
+]
 
-export function newsletterSection(){
+
+export function newsletterSection() {
   return (
       <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32 align-middle">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
