@@ -1,0 +1,5 @@
+{
+  "watch": ["server/", "pages/api/"],
+  "ext": "js,jsx,ts,tsx,json",
+  "exec": "next dev"
+}
