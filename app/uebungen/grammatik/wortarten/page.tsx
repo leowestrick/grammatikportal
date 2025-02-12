@@ -1,9 +1,7 @@
-import { Navbar } from '../../../../components/navbar'
-import { WortartenUebung } from '../../../../components/grammatik/wortarten-uebung'
-import { WortartenInteraktiv } from '../../../../components/grammatik/wortarten-interaktiv'
+import { Navbar } from '@/components/navbar'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { YouTubeVideo } from '../../../../components/youtube-video'
+import { YouTubeVideo } from '@/components/youtube-video'
+import {WortartenSentenceQuiz} from "@/components/grammatik/wortarten-uebungNew";
 
 export default function WortartenPage() {
   return (
@@ -28,24 +26,25 @@ export default function WortartenPage() {
               <li><strong>Artikel:</strong> Begleiten Nomen und zeigen Geschlecht, Zahl und Fall an (z.B. der, die, das)</li>
             </ul>
             <p className="mt-4">Die Kenntnis der Wortarten ist wichtig für das Verständnis der Grammatik und hilft bei der korrekten Satzbildung.</p>
+            <YouTubeVideo
+                videoId="gR99niAKcFM"
+                title="Wortarten Erklärung"
+            />
           </CardContent>
         </Card>
-        <YouTubeVideo 
-          videoId="Pz9oc8vOjZM"
-          title="Wortarten Erklärung"
-        />
-        <Tabs defaultValue="level1">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="level1">Level 1</TabsTrigger>
-            <TabsTrigger value="level2">Level 2</TabsTrigger>
-          </TabsList>
-          <TabsContent value="level1">
-            <WortartenUebung />
-          </TabsContent>
-          <TabsContent value="level2">
-            <WortartenInteraktiv />
-          </TabsContent>
-        </Tabs>
+        {/*<Tabs defaultValue="level1">*/}
+        {/*  <TabsList className="grid w-full grid-cols-2">*/}
+        {/*    <TabsTrigger value="level1">Level 1</TabsTrigger>*/}
+        {/*    <TabsTrigger value="level2">Level 2</TabsTrigger>*/}
+        {/*  </TabsList>*/}
+        {/*  <TabsContent value="level1">*/}
+        {/*    <WortartenUebung />*/}
+        {/*  </TabsContent>*/}
+        {/*  <TabsContent value="level2">*/}
+        {/*    <WortartenInteraktiv />*/}
+        {/*  </TabsContent>*/}
+        {/*</Tabs>*/}
+        <WortartenSentenceQuiz></WortartenSentenceQuiz>
       </main>
     </div>
   )
