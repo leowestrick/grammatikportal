@@ -1,11 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Sparkles, Info } from 'lucide-react'
+import { Info } from 'lucide-react'
 import {
   Tooltip,
   TooltipContent,
@@ -53,19 +51,9 @@ export function KommasetzungSpiel() {
   const [score, setScore] = useState(0)
   const [feedback, setFeedback] = useState<string | null>(null)
   const [showRule, setShowRule] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60)
   const [gameOver, setGameOver] = useState(false)
 
   const currentSentence = sentences[currentSentenceIndex]
-
-  useEffect(() => {
-    if (timeLeft > 0 && !gameOver) {
-      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
-      return () => clearTimeout(timer)
-    } else if (timeLeft === 0 && !gameOver) {
-      endGame()
-    }
-  }, [timeLeft, gameOver])
 
   const toggleComma = (index: number) => {
     setUserCommas(prev => 
@@ -78,7 +66,6 @@ export function KommasetzungSpiel() {
   const checkAnswer = () => {
     const correct = JSON.stringify(userCommas) === JSON.stringify(currentSentence.correctPositions)
     if (correct) {
-      setScore(score + Math.ceil(timeLeft / 10))
       setFeedback("Richtig! Super gemacht!")
       setTimeout(() => {
         if (currentSentenceIndex < sentences.length - 1) {
@@ -86,7 +73,6 @@ export function KommasetzungSpiel() {
           setUserCommas([])
           setFeedback(null)
           setShowRule(false)
-          setTimeLeft(60)
         } else {
           endGame()
         }
@@ -109,7 +95,6 @@ export function KommasetzungSpiel() {
     setScore(0)
     setFeedback(null)
     setShowRule(false)
-    setTimeLeft(60)
     setGameOver(false)
   }
 
@@ -140,14 +125,9 @@ export function KommasetzungSpiel() {
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
           <span>Kommasetzung-Spiel</span>
-          <Badge variant="secondary" className="text-lg">
-            <Sparkles className="w-4 h-4 mr-1" />
-            {score}
-          </Badge>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Progress value={(timeLeft / 60) * 100} className="mb-4" />
         <p className="text-lg mb-4">Klicke auf die Stellen, wo ein Komma stehen sollte:</p>
         <div className="text-2xl mb-6 leading-loose flex flex-wrap items-center">
           {currentSentence.text.split(' ').map((word, index, array) => (

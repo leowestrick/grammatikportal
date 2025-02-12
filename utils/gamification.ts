@@ -1,36 +1,54 @@
-let points = 0
-const badges: { [key: string]: boolean } = {}
+const POINTS_KEY = "deutschLernPoints"
+const BADGES_KEY = "deutschLernBadges"
 
 export const addPoints = (amount: number) => {
-  points += amount
-  // Here you might want to check if the user has reached a new level
-  checkLevelUp()
+  const currentPoints = getPoints()
+  const newPoints = currentPoints + amount
+  localStorage.setItem(POINTS_KEY, newPoints.toString())
+  checkLevelUp(newPoints)
 }
 
-export const getPoints = () => points
+export const getPoints = (): number => {
+  const points = localStorage.getItem(POINTS_KEY)
+  return points ? Number.parseInt(points, 10) : 0
+}
 
 export const unlockBadge = (badgeId: string) => {
+  const badges = getBadges()
   badges[badgeId] = true
+  localStorage.setItem(BADGES_KEY, JSON.stringify(badges))
 }
 
-export const getBadges = () => badges
+export const getBadges = (): { [key: string]: boolean } => {
+  const badges = localStorage.getItem(BADGES_KEY)
+  return badges ? JSON.parse(badges) : {}
+}
 
-const checkLevelUp = () => {
+const checkLevelUp = (points: number) => {
   const level = Math.floor(points / 100) + 1
-  // Here you might want to trigger a level up animation or notification
   console.log(`Current level: ${level}`)
 }
 
-// Initialize with some badges
-const initialBadges = [
-  'verb-konjugation-meister',
-  'perfekte-konjugation',
-  'praepositionen-profi',
-  'satzbau-genie',
-  'rechtschreib-champion'
-]
+// Initialize badges if they don't exist
+const initializeBadges = () => {
+  if (!localStorage.getItem(BADGES_KEY)) {
+    const initialBadges = [
+      "verb-konjugation-meister",
+      "perfekte-konjugation",
+      "praepositionen-profi",
+      "satzbau-genie",
+      "rechtschreib-champion",
+    ]
+    const badges = initialBadges.reduce(
+        (acc, badge) => {
+          acc[badge] = false
+          return acc
+        },
+        {} as { [key: string]: boolean },
+    )
+    localStorage.setItem(BADGES_KEY, JSON.stringify(badges))
+  }
+}
 
-initialBadges.forEach(badge => {
-  badges[badge] = false
-})
+initializeBadges()
 
