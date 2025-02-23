@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Navbar } from '../../components/navbar'
+import { Navbar } from '@/components/navbar'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { getAllProgress } from '../../utils/progress-manager'
+import { getAllProgress } from '@/utils/progress-manager'
 
 interface ProgressData {
   [key: string]: number
@@ -18,10 +18,10 @@ export default function ProgressPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen from-blue-50 to-white">
       <Navbar />
       <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8 text-center text-blue-800">Mein Fortschritt</h1>
+        <h1 className="text-4xl font-bold mb-12 text-center text-gray-800 mt-10">Mein Fortschritt</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {Object.entries(progressData).map(([category, progress]) => (
             <Card key={category}>

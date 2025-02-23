@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Grammatik Portal",
+  title: "DLP - DeutschLernPlattform",
   description: "Grammatik lernen online",
 };
 
@@ -26,7 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}

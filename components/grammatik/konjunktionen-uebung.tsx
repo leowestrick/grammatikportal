@@ -4,9 +4,6 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Sparkles } from 'lucide-react'
 
 interface Question {
   mainClause: string
@@ -22,35 +19,35 @@ const questions: Question[] = [
     subordinateClause: "ich krank bin.",
     options: ["weil", "obwohl", "wenn", "dass"],
     correct: "weil",
-    explanation: "'Weil' is used to express a reason or cause."
+    explanation: "'Weil' wird verwendet, um einen Grund oder eine Ursache auszudrücken."
   },
   {
     mainClause: "Er kommt später,",
     subordinateClause: "er noch arbeiten muss.",
     options: ["wenn", "als", "damit", "weil"],
     correct: "weil",
-    explanation: "'Weil' introduces the reason for his late arrival."
+    explanation: "'Weil' stellt den Grund für seine verspätete Ankunft vor."
   },
   {
     mainClause: "Wir bleiben zu Hause,",
     subordinateClause: "es regnet.",
     options: ["wenn", "obwohl", "weil", "dass"],
     correct: "wenn",
-    explanation: "'Wenn' is used for a conditional statement."
+    explanation: "'Wenn' wird für eine bedingte Anweisung verwendet."
   },
   {
     mainClause: "Sie lernt Deutsch,",
     subordinateClause: "sie in Deutschland studieren kann.",
     options: ["damit", "weil", "ob", "dass"],
     correct: "damit",
-    explanation: "'Damit' expresses purpose or intention."
+    explanation: "'Damit' drückt Zweck oder Absicht aus."
   },
   {
     mainClause: "Ich weiß nicht,",
     subordinateClause: "er morgen kommt.",
     options: ["dass", "ob", "wenn", "weil"],
     correct: "ob",
-    explanation: "'Ob' is used for indirect questions expressing uncertainty."
+    explanation: "'Ob' wird für indirekte Fragen verwendet, die Unsicherheit ausdrücken."
   }
 ]
 
@@ -80,6 +77,14 @@ export function KonjunktionenUebung() {
     }
   }
 
+  const updateProgress = () => {
+    const progress = Math.round((score / questions.length) * 100)
+    const storedProgress = localStorage.getItem('deutschLernProgress')
+    const progressData = storedProgress ? JSON.parse(storedProgress) : {}
+    progressData['Konjunktionen'] = progress
+    localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
+  }
+
   const restartGame = () => {
     setCurrentQuestionIndex(0)
     setSelectedAnswer(null)
@@ -89,6 +94,7 @@ export function KonjunktionenUebung() {
   }
 
   if (isGameOver) {
+    updateProgress()
     return (
       <Card className="w-full max-w-2xl mx-auto">
         <CardContent className="pt-6 text-center">
@@ -103,16 +109,9 @@ export function KonjunktionenUebung() {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle className="flex justify-between items-center">
-          <span>Konjunktionen und Nebensätze Übung</span>
-          <Badge variant="secondary" className="text-lg">
-            <Sparkles className="w-4 h-4 mr-1" />
-            {score}
-          </Badge>
-        </CardTitle>
+          <CardTitle>Frage {currentQuestionIndex + 1} von {questions.length}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Progress value={(currentQuestionIndex / questions.length) * 100} className="mb-4" />
         <p className="text-lg mb-4">Wähle die richtige Konjunktion:</p>
         <p className="text-xl font-semibold mb-4">{currentQuestion.mainClause} _____ {currentQuestion.subordinateClause}</p>
         <Select value={selectedAnswer || ""} onValueChange={setSelectedAnswer}>

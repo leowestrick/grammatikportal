@@ -1,12 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Label } from "@/components/ui/label"
-import { Sparkles } from 'lucide-react'
 
 interface Frage {
   text: string
@@ -83,13 +81,7 @@ export function GrossKleinSchreibung() {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle className="flex justify-between items-center">
-          <span>Groß- und Kleinschreibung</span>
-          <Badge variant="secondary" className="text-lg">
-            <Sparkles className="w-4 h-4 mr-1" />
-            {punktzahl}
-          </Badge>
-        </CardTitle>
+        <CardTitle>Frage {punktzahl + 1} von {fragen.length}</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-lg mb-4">Korrigiere die Groß- und Kleinschreibung im folgenden Satz:</p>

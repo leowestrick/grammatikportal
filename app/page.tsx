@@ -5,7 +5,6 @@ import { Navbar } from '@/components/navbar';
 export default function Example() {
   return (
       <div className="bg-white">
-
         <Navbar></Navbar>
 
         <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -34,7 +33,7 @@ export default function Example() {
                     href="./uebungen/grammatik"
                     className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Grammatik Übungen
+                  Grammatikübungen
                 </a>
                 <a
                     href="./uebungen/rechtschreibung"
@@ -77,11 +76,12 @@ export default function Example() {
             </dl>
           </div>
         </div>
+        <div className={"w-100 bg-black text-gray-400 p-3 text-center"}> © 2025 BWV Ahaus</div>
       </div>
   )
 }
 const stats = [
-  {id: 1, name: 'Übungsaufgaben', value: '20'},
+  {id: 1, name: 'Übungsaufgaben', value: '11'},
   {id: 2, name: 'Monatliche Benutzer', value: '12'},
-  {id: 3, name: 'Entwicklungszeit', value: '800 h'},
+  {id: 3, name: 'Entwicklungszeit', value: '80 h'},
 ]

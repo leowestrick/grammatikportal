@@ -4,9 +4,6 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Sparkles } from 'lucide-react'
 
 interface Question {
   sentence: string
@@ -20,31 +17,31 @@ const questions: Question[] = [
     sentence: "Das ist der Mann, ___ ich gestern getroffen habe.",
     options: ["der", "den", "dem", "dessen"],
     correct: "den",
-    explanation: "We use 'den' because it's the accusative form of 'der' for a masculine noun in the relative clause."
+    explanation: "Wir verwenden „den“, weil es die Akkusativform von „der“ für ein maskulines Substantiv im Relativsatz ist."
   },
   {
     sentence: "Die Frau, ___ Auto vor dem Haus steht, ist meine Nachbarin.",
     options: ["der", "die", "deren", "denen"],
     correct: "deren",
-    explanation: "We use 'deren' as the genitive form for a feminine noun in the relative clause."
+    explanation: "Wir verwenden „deren“ als Genitivform für ein feminines Substantiv im Relativsatz."
   },
   {
     sentence: "Das Buch, ___ ich gerade lese, ist sehr spannend.",
     options: ["das", "dem", "dessen", "welches"],
     correct: "das",
-    explanation: "We use 'das' as the relative pronoun for a neuter noun in the nominative or accusative case."
+    explanation: "Wir verwenden „das“ als Relativpronomen für ein Substantiv im Nominativ oder Akkusativ."
   },
   {
     sentence: "Die Kinder, mit ___ ich gespielt habe, sind sehr nett.",
     options: ["denen", "deren", "die", "welche"],
     correct: "denen",
-    explanation: "We use 'denen' as the dative form for plural nouns in the relative clause."
+    explanation: "Wir verwenden „denen“ als Dativform für Pluralnomen im Relativsatz."
   },
   {
     sentence: "Der Hund, ___ wir gefunden haben, gehört unserem Nachbarn.",
     options: ["der", "den", "dem", "dessen"],
     correct: "den",
-    explanation: "We use 'den' because it's the accusative form of 'der' for a masculine noun in the relative clause."
+    explanation: "Wir verwenden „den“, weil es die Akkusativform von „der“ für ein maskulines Substantiv im Relativsatz ist."
   }
 ]
 
@@ -74,6 +71,13 @@ export function RelativpronomenUebung() {
     }
   }
 
+  const updateProgress = () => {
+    const progress = Math.round((score / questions.length) * 100)
+    const storedProgress = localStorage.getItem('deutschLernProgress')
+    const progressData = storedProgress ? JSON.parse(storedProgress) : {}
+    progressData['Relativpronomen'] = progress
+    localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
+  }
   const restartGame = () => {
     setCurrentQuestionIndex(0)
     setSelectedAnswer(null)
@@ -83,6 +87,7 @@ export function RelativpronomenUebung() {
   }
 
   if (isGameOver) {
+    updateProgress()
     return (
       <Card className="w-full max-w-2xl mx-auto">
         <CardContent className="pt-6 text-center">
@@ -99,14 +104,9 @@ export function RelativpronomenUebung() {
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
           <span>Relativpronomen Übung</span>
-          <Badge variant="secondary" className="text-lg">
-            <Sparkles className="w-4 h-4 mr-1" />
-            {score}
-          </Badge>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Progress value={(currentQuestionIndex / questions.length) * 100} className="mb-4" />
         <p className="text-lg mb-4">Wähle das richtige Relativpronomen:</p>
         <p className="text-xl font-semibold mb-4">{currentQuestion.sentence}</p>
         <Select value={selectedAnswer || ""} onValueChange={setSelectedAnswer}>

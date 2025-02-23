@@ -3,11 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Sparkles } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { addPoints, unlockBadge } from '@/utils/gamification'
-import { saveProgress } from '@/utils/progress-manager'
+import { addPoints } from '@/utils/gamification'
 
 interface TextWithGaps {
     text: string
@@ -119,12 +116,11 @@ export function SSZUebung() {
     }
 
     const updateProgress = () => {
-        const totalGaps = texts.reduce((sum, text) => sum + text.gaps.length, 0)
-        const progress = Math.round((score / totalGaps) * 100)
-        saveProgress('s-ss-ß Übung', progress)
-        if (progress === 100) {
-            unlockBadge('s-ss-ß-meister')
-        }
+        const progress = Math.round((score / texts.length) * 100)
+        const storedProgress = localStorage.getItem('deutschLernProgress')
+        const progressData = storedProgress ? JSON.parse(storedProgress) : {}
+        progressData['s, ss oder ß'] = progress
+        localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
     }
 
     const restartGame = () => {
@@ -152,13 +148,7 @@ export function SSZUebung() {
     return (
         <Card className="w-full max-w-2xl mx-auto">
             <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                    <span>s, ss oder ß Übung</span>
-                    <Badge variant="secondary" className="text-lg">
-                        <Sparkles className="w-4 h-4 mr-1" />
-                        {score}
-                    </Badge>
-                </CardTitle>
+                <CardTitle>Frage {score + 1} von {texts.length}</CardTitle>
             </CardHeader>
             <CardContent>
                 <p className="text-lg mb-4">Fülle die Lücken mit s, ss oder ß:</p>

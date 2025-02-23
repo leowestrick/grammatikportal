@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/outline";
 import {Dialog, DialogPanel} from "@headlessui/react";
@@ -13,7 +12,7 @@ export function Navbar() {
       <header className="absolute inset-x-0 top-0 z-50">
         <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a href="/" className="-m-1.5 p-1.5 text-2xl font-bold text-blue-600">
               <span className="sr-only">DeutschLernPlattform</span>
               DeutscheLernPlattform
             </a>
@@ -34,10 +33,16 @@ export function Navbar() {
                 <Link href="/" className="text-gray-600 hover:text-gray-800 transition-colors">Startseite</Link>
               </motion.li>
               <motion.li whileHover={{scale: 1.05}} whileTap={{scale: 0.95}}>
-                <Link href="/uebungen/grammatik" className="text-gray-600 hover:text-gray-800 transition-colors">Grammatik</Link>
+                <Link href="/uebungen/grammatik"
+                      className="text-gray-600 hover:text-gray-800 transition-colors">Grammatik</Link>
               </motion.li>
               <motion.li whileHover={{scale: 1.05}} whileTap={{scale: 0.95}}>
-                <Link href="/uebungen/rechtschreibung" className="text-gray-600 hover:text-gray-800 transition-colors">Rechtschreibung</Link>
+                <Link href="/uebungen/rechtschreibung"
+                      className="text-gray-600 hover:text-gray-800 transition-colors">Rechtschreibung</Link>
+              </motion.li>
+              <motion.li whileHover={{scale: 1.05}} whileTap={{scale: 0.95}}>
+                <Link href="/fortschritt"
+                      className="text-gray-600 hover:text-gray-800 transition-colors">Fortschritt</Link>
               </motion.li>
             </ul>
           </div>
@@ -53,12 +58,8 @@ export function Navbar() {
               className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
-                <Image
-                    alt=""
-                    src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-                    className="h-8 w-auto"
-                />
+                <span className="sr-only">DLP</span>
+                DLP
               </a>
               <button
                   type="button"
@@ -72,7 +73,7 @@ export function Navbar() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-                  <ul className="flex space-x-6">
+                  <ul className="flex flex-col gap-2">
                     <motion.li whileHover={{scale: 1.05}} whileTap={{scale: 0.95}}>
                       <Link href="/" className="text-gray-600 hover:text-gray-800 transition-colors">Startseite</Link>
                     </motion.li>
@@ -84,14 +85,6 @@ export function Navbar() {
                       <Link href="/uebungen/rechtschreibung" className="text-gray-600 hover:text-gray-800 transition-colors">Rechtschreibung</Link>
                     </motion.li>
                   </ul>
-                </div>
-                <div className="py-6">
-                  <a
-                      href="#"
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
                 </div>
               </div>
             </div>

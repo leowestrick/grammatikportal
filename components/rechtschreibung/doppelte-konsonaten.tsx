@@ -3,11 +3,8 @@
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { addPoints, unlockBadge } from '@/utils/gamification'
-import { saveProgress } from '@/utils/progress-manager'
+import { addPoints } from '@/utils/gamification'
 
 interface Word {
     word: string
@@ -65,10 +62,10 @@ export function DoppelteKonsonantenUebung() {
 
     const updateProgress = () => {
         const progress = Math.round((score / words.length) * 100)
-        saveProgress('Konsonanten Übung', progress)
-        if (progress === 100) {
-            unlockBadge('konsonanten-meister')
-        }
+        const storedProgress = localStorage.getItem('deutschLernProgress')
+        const progressData = storedProgress ? JSON.parse(storedProgress) : {}
+        progressData['Doppelte Konsonanten'] = progress
+        localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
     }
 
     const restartGame = () => {
@@ -95,13 +92,7 @@ export function DoppelteKonsonantenUebung() {
     return (
         <Card className="w-full max-w-md mx-auto">
             <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                    <span>Konsonanten Übung</span>
-                    <Badge variant="secondary" className="text-lg">
-                        <Sparkles className="w-4 h-4 mr-1" />
-                        {score}
-                    </Badge>
-                </CardTitle>
+                <CardTitle>Frage {score + 1} von {words.length}</CardTitle>
             </CardHeader>
             <CardContent>
                 <p className="text-lg mb-4">Wähle die richtige Schreibweise:</p>

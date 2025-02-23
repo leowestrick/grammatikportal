@@ -1,5 +1,4 @@
 import { Navbar } from '@/components/navbar'
-import { SSZUebung } from '@/components/rechtschreibung/s-ss-sz'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { YouTubeVideo } from '@/components/youtube-video'
 
@@ -8,7 +7,7 @@ export default function SSZPage() {
         <div className="min-h-screen bg-gray-100">
             <Navbar />
             <main className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold mb-8 text-center">s, ss oder ß Übung</h1>
+                <h1 className="text-3xl font-bold mb-8 text-center mt-10">s, ss oder ß</h1>
                 <Card className="mb-8">
                     <CardHeader>
                         <CardTitle>Erklärung: s, ss und ß</CardTitle>
@@ -33,7 +32,14 @@ export default function SSZPage() {
                     videoId="cjxBIKOIys8"
                     title="s, ss und ß Erklärung"
                 />
-                <SSZUebung />
+                <div className="text-center mt-8">
+                    <a
+                        href="./s-ss-sz/uebung"
+                        className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        Zur Übung
+                    </a>
+                </div>
             </main>
         </div>
     )

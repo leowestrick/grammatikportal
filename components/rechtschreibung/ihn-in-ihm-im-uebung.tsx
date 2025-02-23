@@ -3,11 +3,8 @@
 import React, {useState, useRef, useEffect} from 'react'
 import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
-import {Badge} from "@/components/ui/badge"
-import {Sparkles} from 'lucide-react'
 import {motion, AnimatePresence} from 'framer-motion'
-import {addPoints, unlockBadge} from '@/utils/gamification'
-import {saveProgress} from '@/utils/progress-manager'
+import {addPoints} from '@/utils/gamification'
 
 interface Sentence {
     text: string
@@ -95,12 +92,11 @@ export function IhnInIhmImUebung() {
     }
 
     const updateProgress = () => {
-        const totalGaps = sentences.reduce((sum, sentence) => sum + sentence.gaps.length, 0)
-        const progress = Math.round((score / totalGaps) * 100)
-        saveProgress('Ihn/In Ihm/Im Übung', progress)
-        if (progress === 100) {
-            unlockBadge('ihn-in-ihm-im-meister')
-        }
+        const progress = Math.round((score / sentences.length) * 100)
+        const storedProgress = localStorage.getItem('deutschLernProgress')
+        const progressData = storedProgress ? JSON.parse(storedProgress) : {}
+        progressData['Ihn/In oder Ihm/Im'] = progress
+        localStorage.setItem('deutschLernProgress', JSON.stringify(progressData))
     }
 
     const restartGame = () => {
@@ -128,13 +124,7 @@ export function IhnInIhmImUebung() {
     return (
         <Card className="w-full max-w-2xl mx-auto">
             <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                    <span>ihn/in und ihm/im Übung</span>
-                    <Badge variant="secondary" className="text-lg">
-                        <Sparkles className="w-4 h-4 mr-1"/>
-                        {score}
-                    </Badge>
-                </CardTitle>
+                <CardTitle>Frage {score + 1} von {sentences.length}</CardTitle>
             </CardHeader>
             <CardContent>
                 <p className="text-lg mb-4">Wähle die richtige Option:</p>
