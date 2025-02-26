@@ -112,7 +112,7 @@ export function RechtschreibUebung() {
       >
         <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
         <p className="text-xl mb-4">Deine Punktzahl: {points} von {questions[difficulty].length}</p>
-        <Button onClick={() => {
+        <Button disabled={!!feedback}  onClick={() => {
           setCurrentQuestionIndex(0)
           setAnswers(Array(questions[difficulty].length).fill(''))
           setIsFinished(false)
@@ -181,10 +181,10 @@ export function RechtschreibUebung() {
         </CardContent>
       </Card>
       <div className="flex justify-between">
-        <Button onClick={() => setShowAdvice(true)} variant="outline" className="text-gray-600">
+        <Button disabled={!!feedback}  onClick={() => setShowAdvice(true)} variant="outline" className="text-gray-600">
           Hinweis
         </Button>
-        <Button onClick={checkAnswer} className="bg-blue-500 hover:bg-blue-600 text-white text-lg py-3" disabled={!currentAnswer}>
+        <Button disabled={!!feedback}  onClick={checkAnswer} className="bg-blue-500 hover:bg-blue-600 text-white text-lg py-3" disabled={!currentAnswer}>
           Antwort prüfen
         </Button>
       </div>

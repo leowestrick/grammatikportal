@@ -137,7 +137,7 @@ export function SSZUebung() {
                 <CardContent className="pt-6 text-center">
                     <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
                     <p className="text-xl mb-4">Deine Gesamtpunktzahl: {score}</p>
-                    <Button onClick={restartGame} className="w-full">
+                    <Button disabled={!!feedback}  onClick={restartGame} className="w-full">
                         Noch einmal spielen
                     </Button>
                 </CardContent>
@@ -174,7 +174,7 @@ export function SSZUebung() {
                         return <span key={index}>{char}</span>
                     })}
                 </div>
-                <Button onClick={checkAnswers} className="w-full mb-4" disabled={userAnswers.length !== currentText.gaps.length || userAnswers.includes('')}>
+                <Button disabled={!!feedback}  onClick={checkAnswers} className="w-full mb-4" disabled={userAnswers.length !== currentText.gaps.length || userAnswers.includes('')}>
                     Antworten überprüfen
                 </Button>
                 <AnimatePresence>

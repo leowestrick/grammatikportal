@@ -29,7 +29,7 @@ export function PraepositionRegeln({ onWeiterClick }: PraepositionRegelnProps) {
         </ul>
       </CardContent>
       <CardFooter>
-        <Button onClick={onWeiterClick} className="w-full">Weiter zur Übung</Button>
+        <Button disabled={!!feedback}  onClick={onWeiterClick} className="w-full">Weiter zur Übung</Button>
       </CardFooter>
     </Card>
   )

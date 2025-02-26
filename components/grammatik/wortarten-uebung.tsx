@@ -66,7 +66,7 @@ export function WortartenUebung() {
         <CardContent className="pt-6">
           <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
           <p className="text-xl mb-4">Deine Punktzahl: {punktzahl} von {fragen.length}</p>
-          <Button onClick={() => {
+          <Button disabled={!!feedback}  onClick={() => {
             setAktuelleFrageIndex(0)
             setPunktzahl(0)
             setAntwort(null)
@@ -99,7 +99,7 @@ export function WortartenUebung() {
             {feedback}
           </p>
         )}
-        <Button onClick={pruefeAntwort} className="mt-4" disabled={!antwort}>
+        <Button disabled={!!feedback}  onClick={pruefeAntwort} className="mt-4" disabled={!antwort}>
           Nächste Frage
         </Button>
       </CardContent>

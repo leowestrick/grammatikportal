@@ -27,7 +27,7 @@ export function ArtikelRegeln({ onWeiterClick }: ArtikelRegelnProps) {
         </ul>
       </CardContent>
       <CardFooter>
-        <Button onClick={onWeiterClick} className="w-full">Weiter zur Übung</Button>
+        <Button disabled={!!feedback}  onClick={onWeiterClick} className="w-full">Weiter zur Übung</Button>
       </CardFooter>
     </Card>
   )

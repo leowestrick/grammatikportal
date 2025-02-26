@@ -79,10 +79,10 @@ export function WortDurcheinanderSpiel() {
           className="mb-4"
         />
         <div className="flex justify-between mb-4">
-          <Button onClick={() => setShowHint(true)} variant="outline">
+          <Button disabled={!!feedback}  onClick={() => setShowHint(true)} variant="outline">
             Hinweis
           </Button>
-          <Button onClick={checkGuess}>Überprüfen</Button>
+          <Button disabled={!!feedback}  onClick={checkGuess}>Überprüfen</Button>
         </div>
         {showHint && (
           <p className="text-sm text-gray-600 mb-4">Hinweis: {currentWord.hint}</p>
