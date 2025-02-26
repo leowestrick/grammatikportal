@@ -76,7 +76,7 @@ export function DehnungsHUebung() {
                 <CardContent className="pt-6 text-center">
                     <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
                     <p className="text-xl mb-4">Deine Punktzahl: {score} von {words.length}</p>
-                    <Button onClick={restartGame} className="w-full">
+                    <Button disabled={!!feedback}  onClick={restartGame} className="w-full">
                         Noch einmal spielen
                     </Button>
                 </CardContent>
@@ -94,7 +94,7 @@ export function DehnungsHUebung() {
                 <p className="text-2xl font-bold mb-6 text-center">{currentWord.word}</p>
                 <div className="grid grid-cols-2 gap-4 mb-4">
                     {currentWord.options.map((option, index) => (
-                        <Button
+                        <Button disabled={!!feedback}
                             key={index}
                             onClick={() => checkAnswer(option)}
                             className="w-full text-lg py-2"

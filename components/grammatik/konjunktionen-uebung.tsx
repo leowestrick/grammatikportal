@@ -100,7 +100,7 @@ export function KonjunktionenUebung() {
         <CardContent className="pt-6 text-center">
           <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
           <p className="text-xl mb-4">Deine Punktzahl: {score} von {questions.length}</p>
-          <Button onClick={restartGame} className="w-full">Noch einmal spielen</Button>
+          <Button disabled={!!feedback}  onClick={restartGame} className="w-full">Noch einmal spielen</Button>
         </CardContent>
       </Card>
     )
@@ -124,7 +124,7 @@ export function KonjunktionenUebung() {
             ))}
           </SelectContent>
         </Select>
-        <Button onClick={handleAnswer} className="w-full mb-4" disabled={!selectedAnswer || showExplanation}>
+        <Button disabled={!!feedback}  onClick={handleAnswer} className="w-full mb-4" disabled={!selectedAnswer || showExplanation}>
           Antwort prüfen
         </Button>
         {showExplanation && (
@@ -133,7 +133,7 @@ export function KonjunktionenUebung() {
               {selectedAnswer === currentQuestion.correct ? 'Richtig!' : 'Falsch.'}
             </p>
             <p className="mt-2">{currentQuestion.explanation}</p>
-            <Button onClick={nextQuestion} className="w-full mt-4">
+            <Button disabled={!!feedback}  onClick={nextQuestion} className="w-full mt-4">
               {currentQuestionIndex < questions.length - 1 ? 'Nächste Frage' : 'Ergebnis anzeigen'}
             </Button>
           </div>

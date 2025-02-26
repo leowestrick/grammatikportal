@@ -76,7 +76,7 @@ export function WortartenInteraktiv() {
         <CardContent className="pt-6 text-center">
           <h2 className="text-2xl font-bold mb-4">Spiel beendet!</h2>
           <p className="text-xl mb-4">Deine Gesamtpunktzahl: {score}</p>
-          <Button onClick={restartGame} className="w-full">
+          <Button disabled={!!feedback}  onClick={restartGame} className="w-full">
             Noch einmal spielen
           </Button>
         </CardContent>
@@ -108,7 +108,7 @@ export function WortartenInteraktiv() {
         <div className="grid grid-cols-2 gap-4">
           {wordTypes.map((type) => (
             <motion.div key={type} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
+              <Button disabled={!!feedback}
                 onClick={() => handleAnswer(type)}
                 className="w-full"
                 variant="outline"

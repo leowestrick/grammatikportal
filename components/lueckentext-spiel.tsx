@@ -113,7 +113,7 @@ export function LueckentextSpiel() {
             </span>
           ))}
         </p>
-        <Button onClick={checkAnswers} className="w-full mb-4">Überprüfen</Button>
+        <Button disabled={!!feedback}  onClick={checkAnswers} className="w-full mb-4">Überprüfen</Button>
         {feedback && (
           <p className={`text-center ${feedback.includes("Richtig") ? "text-green-600" : "text-red-600"}`}>
             {feedback}

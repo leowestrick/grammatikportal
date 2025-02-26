@@ -172,7 +172,7 @@ export function SatzbauUebung() {
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
         <p className="text-xl mb-4">Deine Punktzahl: {punktzahl} von {fragen[schwierigkeitsgrad].length}</p>
-        <Button onClick={() => {
+        <Button disabled={!!feedback}  onClick={() => {
           setAktuelleFrageIndex(0)
           setAntwort("")
           setFeedback(null)
@@ -243,7 +243,7 @@ export function SatzbauUebung() {
           )}
         </CardContent>
       </Card>
-      <Button onClick={pruefeAntwort} className="w-full" disabled={!antwort.trim()}>
+      <Button disabled={!!feedback}  onClick={pruefeAntwort} className="w-full" disabled={!antwort.trim()}>
         Antwort prüfen
       </Button>
     </div>
