@@ -112,7 +112,7 @@ export function RechtschreibUebung() {
       >
         <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
         <p className="text-xl mb-4">Deine Punktzahl: {points} von {questions[difficulty].length}</p>
-        <Button disabled={!!feedback}  onClick={() => {
+        <Button onClick={() => {
           setCurrentQuestionIndex(0)
           setAnswers(Array(questions[difficulty].length).fill(''))
           setIsFinished(false)
