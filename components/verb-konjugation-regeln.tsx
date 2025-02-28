@@ -31,7 +31,7 @@ export function VerbKonjugationRegeln({ onWeiterClick }: VerbKonjugationRegelnPr
         </ul>
       </CardContent>
       <CardFooter>
-        <Button disabled={!!feedback}  onClick={onWeiterClick} className="w-full">Weiter zur Übung</Button>
+        <Button onClick={onWeiterClick} className="w-full">Weiter zur Übung</Button>
       </CardFooter>
     </Card>
   )
