@@ -243,7 +243,7 @@ export function SatzbauUebung() {
           )}
         </CardContent>
       </Card>
-      <Button disabled={!!feedback}  onClick={pruefeAntwort} className="w-full" disabled={!antwort.trim()}>
+      <Button onClick={pruefeAntwort} className="w-full" disabled={!antwort.trim()}>
         Antwort prüfen
       </Button>
     </div>

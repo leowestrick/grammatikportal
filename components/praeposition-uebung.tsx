@@ -200,7 +200,7 @@ export function PraepositionUebung() {
           )}
         </CardContent>
       </Card>
-      <Button disabled={!!feedback}  onClick={pruefeAntwort} className="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg py-3" disabled={!aktuelleAntwort}>
+      <Button onClick={pruefeAntwort} className="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg py-3" disabled={!aktuelleAntwort}>
         Antwort prüfen
       </Button>
     </div>

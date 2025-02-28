@@ -174,7 +174,7 @@ export function SSZUebung() {
                         return <span key={index}>{char}</span>
                     })}
                 </div>
-                <Button disabled={!!feedback}  onClick={checkAnswers} className="w-full mb-4" disabled={userAnswers.length !== currentText.gaps.length || userAnswers.includes('')}>
+                <Button onClick={checkAnswers} className="w-full mb-4" disabled={userAnswers.length !== currentText.gaps.length || userAnswers.includes('')}>
                     Antworten überprüfen
                 </Button>
                 <AnimatePresence>

@@ -345,7 +345,7 @@ export function MultiLevelUebung() {
           </AnimatePresence>
         </CardContent>
       </Card>
-      <Button disabled={!!feedback}  onClick={pruefeAntwort} className="w-full" disabled={!antwort}>
+      <Button onClick={pruefeAntwort} className="w-full" disabled={!antwort}>
         Antwort prüfen
       </Button>
     </div>

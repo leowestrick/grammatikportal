@@ -99,7 +99,7 @@ export function WortartenUebung() {
             {feedback}
           </p>
         )}
-        <Button disabled={!!feedback}  onClick={pruefeAntwort} className="mt-4" disabled={!antwort}>
+        <Button onClick={pruefeAntwort} className="mt-4" disabled={!antwort}>
           Nächste Frage
         </Button>
       </CardContent>

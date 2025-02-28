@@ -116,7 +116,7 @@ export function SatzartenUebung() {
             </div>
           ))}
         </RadioGroup>
-        <Button disabled={!!feedback}  onClick={pruefeAntwort} className="mt-4" disabled={!antwort}>
+        <Button onClick={pruefeAntwort} className="mt-4" disabled={!antwort}>
           Antwort prüfen
         </Button>
         {feedback && (

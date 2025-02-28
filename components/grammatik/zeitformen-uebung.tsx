@@ -101,7 +101,7 @@ export function ZeitformenUebung() {
             className="mt-1"
           />
         </div>
-        <Button disabled={!!feedback}  onClick={pruefeAntwort} disabled={!antwort.trim()}>
+        <Button onClick={pruefeAntwort} disabled={!antwort.trim()}>
           Antwort prüfen
         </Button>
         {feedback && (

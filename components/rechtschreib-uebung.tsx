@@ -181,10 +181,10 @@ export function RechtschreibUebung() {
         </CardContent>
       </Card>
       <div className="flex justify-between">
-        <Button disabled={!!feedback}  onClick={() => setShowAdvice(true)} variant="outline" className="text-gray-600">
+        <Button onClick={() => setShowAdvice(true)} variant="outline" className="text-gray-600">
           Hinweis
         </Button>
-        <Button disabled={!!feedback}  onClick={checkAnswer} className="bg-blue-500 hover:bg-blue-600 text-white text-lg py-3" disabled={!currentAnswer}>
+        <Button onClick={checkAnswer} className="bg-blue-500 hover:bg-blue-600 text-white text-lg py-3" disabled={!currentAnswer}>
           Antwort prüfen
         </Button>
       </div>

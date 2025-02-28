@@ -153,7 +153,7 @@ export function IhnInIhmImUebung() {
                         return <span key={index}>{char}</span>
                     })}
                 </div>
-                <Button disabled={!!feedback}  onClick={checkAnswers} className="w-full mb-4"
+                <Button onClick={checkAnswers} className="w-full mb-4"
                         disabled={userAnswers.length !== currentSentence.gaps.length || userAnswers.includes('')}>
                     Antworten überprüfen
                 </Button>
