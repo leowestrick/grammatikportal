@@ -118,7 +118,7 @@ export function WortartenSentenceQuiz() {
                     <p className="text-xl mb-4">
                         Deine Gesamtpunktzahl: {score} von {questions.length}
                     </p>
-                    <Button onClick={restartGame} className="w-full">
+                    <Button disabled={!!feedback}  onClick={restartGame} className="w-full">
                         Noch einmal spielen
                     </Button>
                 </CardContent>
@@ -138,7 +138,7 @@ export function WortartenSentenceQuiz() {
                 <p className="text-xl font-semibold mb-6" dangerouslySetInnerHTML={{ __html: currentQuestion.sentence }} />
                 <div className="grid grid-cols-2 gap-4 mb-4">
                     {wordTypes.map((type) => (
-                        <Button key={type} onClick={() => handleAnswer(type)} variant="outline" className="w-full">
+                        <Button disabled={!!feedback}  key={type} onClick={() => handleAnswer(type)} variant="outline" className="w-full">
                             {type}
                         </Button>
                     ))}

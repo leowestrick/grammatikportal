@@ -86,7 +86,7 @@ export function SatzartenUebung() {
         <CardContent className="pt-6">
           <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
           <p className="text-xl mb-4">Deine Punktzahl: {punktzahl} von {fragen.length}</p>
-          <Button onClick={() => {
+          <Button disabled={!!feedback}  onClick={() => {
             setAktuelleFrageIndex(0)
             setPunktzahl(0)
             setAntwort(null)

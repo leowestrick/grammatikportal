@@ -115,7 +115,7 @@ export function KommasetzungSpiel() {
           <CardContent className="pt-6 text-center">
             <h2 className="text-2xl font-bold mb-4">Spiel beendet!</h2>
             <p className="text-xl mb-4">Deine Gesamtpunktzahl: {score}</p>
-            <Button onClick={restartGame} className="w-full">
+            <Button disabled={!!feedback}  onClick={restartGame} className="w-full">
               Noch einmal spielen
             </Button>
           </CardContent>
@@ -165,7 +165,7 @@ export function KommasetzungSpiel() {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="outline" size="icon">
+                  <Button disabled={!!feedback}  variant="outline" size="icon">
                     <Info className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
@@ -174,7 +174,7 @@ export function KommasetzungSpiel() {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            <Button onClick={checkAnswer}>Antwort prüfen</Button>
+            <Button disabled={!!feedback}  onClick={checkAnswer}>Antwort prüfen</Button>
           </div>
         </CardContent>
       </Card>

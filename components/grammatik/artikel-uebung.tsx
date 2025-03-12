@@ -267,7 +267,7 @@ export function ArtikelUebung() {
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
         <p className="text-xl mb-4">Deine Punktzahl: {punktzahl} von {fragen[schwierigkeitsgrad].length}</p>
-        <Button onClick={() => {
+        <Button  onClick={() => {
           setAktuelleFrageIndex(0)
           setAntworten(Array(fragen[schwierigkeitsgrad].length).fill(''))
           setIstBeendet(false)

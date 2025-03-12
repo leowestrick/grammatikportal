@@ -112,7 +112,7 @@ export function DassVsDasQuiz() {
                     <p className="text-xl mb-4">
                         Deine Gesamtpunktzahl: {score} von {questions.length}
                     </p>
-                    <Button onClick={restartGame} className="w-full">
+                    <Button disabled={!!feedback}  onClick={restartGame} className="w-full">
                         Noch einmal spielen
                     </Button>
                 </CardContent>
@@ -129,10 +129,10 @@ export function DassVsDasQuiz() {
                 <p className="text-lg mb-4">Wähle die richtige Form (dass oder das) für den folgenden Satz:</p>
                 <p className="text-xl font-semibold mb-6">{currentQuestion.sentence.replace("___", "________")}</p>
                 <div className="flex justify-center space-x-4 mb-4">
-                    <Button onClick={() => handleAnswer("dass")} variant="outline" className="w-1/3">
+                    <Button disabled={!!feedback}  onClick={() => handleAnswer("dass")} variant="outline" className="w-1/3">
                         dass
                     </Button>
-                    <Button onClick={() => handleAnswer("das")} variant="outline" className="w-1/3">
+                    <Button disabled={!!feedback}  onClick={() => handleAnswer("das")} variant="outline" className="w-1/3">
                         das
                     </Button>
                 </div>

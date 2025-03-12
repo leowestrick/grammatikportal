@@ -109,7 +109,7 @@ export function FehlerFindenSpiel() {
             </span>
           ))}
         </p>
-        <Button onClick={checkAnswer} className="w-full mb-4">Überprüfen</Button>
+        <Button disabled={!!feedback}  onClick={checkAnswer} className="w-full mb-4">Überprüfen</Button>
         {feedback && (
           <p className={`text-center mb-4 ${feedback.includes("Richtig") ? "text-green-600" : "text-red-600"}`}>
             {feedback}
@@ -123,7 +123,7 @@ export function FehlerFindenSpiel() {
           </div>
         )}
         {showExplanation && (
-          <Button onClick={nextSentence} className="w-full">Nächster Satz</Button>
+          <Button disabled={!!feedback}  onClick={nextSentence} className="w-full">Nächster Satz</Button>
         )}
       </CardContent>
     </Card>

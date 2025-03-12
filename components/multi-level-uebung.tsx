@@ -248,7 +248,7 @@ export function MultiLevelUebung() {
         return (
           <div className="grid grid-cols-2 gap-2">
             {aktuelleFrage.antworten!.map((option, index) => (
-              <Button
+              <Button disabled={!!feedback}
                 key={index}
                 variant={antwort === option ? "default" : "outline"}
                 onClick={() => setAntwort(option)}
@@ -285,7 +285,7 @@ export function MultiLevelUebung() {
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">Übung beendet!</h2>
         <p className="text-xl mb-4">Deine Punktzahl: {punktzahl}</p>
-        <Button onClick={() => {
+        <Button disabled={!!feedback}  onClick={() => {
           setAktuellesLevel(0)
           setAktuelleFrageIndex(0)
           setAntwort("")
