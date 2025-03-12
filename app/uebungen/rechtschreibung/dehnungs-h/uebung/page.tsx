@@ -1,7 +1,6 @@
 import {Navbar} from "@/components/navbar";
 import {DehnungsHUebung} from "@/components/rechtschreibung/dehnungs-h";
 
-
 export default function uebungDoppelteKonsonanten(){
     return (
         <div className="min-h-screen bg-gray-100">
