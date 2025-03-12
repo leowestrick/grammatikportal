@@ -112,7 +112,7 @@ export function DassVsDasQuiz() {
                     <p className="text-xl mb-4">
                         Deine Gesamtpunktzahl: {score} von {questions.length}
                     </p>
-                    <Button disabled={!!feedback}  onClick={restartGame} className="w-full">
+                    <Button onClick={restartGame} className="w-full">
                         Noch einmal spielen
                     </Button>
                 </CardContent>

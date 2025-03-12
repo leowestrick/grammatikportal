@@ -123,7 +123,7 @@ export function KommasetzungSpiel() {
         <CardContent className="pt-6 text-center">
           <h2 className="text-2xl font-bold mb-4">Spiel beendet!</h2>
           <p className="text-xl mb-4">Deine Gesamtpunktzahl: {score}</p>
-          <Button disabled={!!feedback}  onClick={restartGame} className="w-full">
+          <Button onClick={restartGame} className="w-full">
             Noch einmal spielen
           </Button>
         </CardContent>
