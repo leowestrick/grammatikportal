@@ -81,6 +81,16 @@ export function KommasetzungSpiel() {
     } else {
       setFeedback("Nicht ganz richtig. Versuch es noch einmal!")
       setShowRule(true)
+      setTimeout(() => {
+        if (currentSentenceIndex < sentences.length - 1) {
+          setCurrentSentenceIndex(currentSentenceIndex + 1)
+          setUserCommas([])
+          setFeedback(null)
+          setShowRule(false)
+        } else {
+          endGame()
+        }
+      }, 2000)
     }
   }
 
@@ -124,7 +134,7 @@ export function KommasetzungSpiel() {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle>Frage {score + 1} von {sentences.length}</CardTitle>
+        <CardTitle>Frage {currentSentenceIndex + 1 } von {sentences.length}</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-lg mb-4">Klicke auf die Stellen, wo ein Komma stehen sollte:</p>
